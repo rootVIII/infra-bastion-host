@@ -1,10 +1,3 @@
-// TODO: replace DEV with current when project is restructured
-
-variable "vpc_name" {
-  description = "DEV VPC"
-  type        = string
-  default     = "dev_vpc"
-}
 
 variable "vpc_cidr" {
   description = "CIDR block for VPC"
@@ -42,6 +35,11 @@ variable "one_nat_gateway_per_az" {
   default     = false
 }
 
+variable "environment" {
+  description = "Set in root module"
+  type        = string
+}
+
 variable "aws_region" {
   description = "Set in root module"
   type        = string
@@ -53,5 +51,6 @@ variable "project_tags" {
 }
 
 locals {
-  vpc_azs = ["${var.aws_region}a", "${var.aws_region}b", "${var.aws_region}c"]
+  vpc_name = "${var.environment}_vpc"
+  vpc_azs  = ["${var.aws_region}a", "${var.aws_region}b", "${var.aws_region}c"]
 }

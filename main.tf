@@ -3,6 +3,7 @@ module "network" {
   source       = "./network"
   aws_region   = var.aws_region
   project_tags = var.project_tags
+  environment  = var.environment
 }
 
 module "ec2" {

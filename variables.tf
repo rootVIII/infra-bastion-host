@@ -4,6 +4,11 @@ variable "namespace" {
   type        = string
 }
 
+variable "environment" {
+  description = "Current infrastructure environment"
+  type        = string
+}
+
 # variable "ssh_keypair" {
 #   description = "SSH keypair to use for EC2 instance"
 #   default     = null
