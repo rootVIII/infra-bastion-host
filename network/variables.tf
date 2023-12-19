@@ -1,7 +1,7 @@
 // TODO: replace DEV with current when project is restructured
 
 variable "vpc_name" {
-  description = "Development VPC"
+  description = "DEV VPC"
   type        = string
   default     = "dev_vpc"
 }

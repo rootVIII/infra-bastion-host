@@ -1,3 +1,4 @@
+
 output "aws_region" {
   description = "Current region"
   value       = var.aws_region

@@ -9,7 +9,6 @@ resource "aws_instance" "bastion_host" {
   }
 }
 
-
 resource "aws_instance" "private_host" {
   ami                    = var.ami
   instance_type          = "t2.nano"
