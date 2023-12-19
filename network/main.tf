@@ -1,13 +1,15 @@
 module "vpc" {
-  source             = "terraform-aws-modules/vpc/aws"
-  version            = "5.0.0"
-  name               = var.vpc_name
-  cidr               = var.vpc_cidr
-  azs                = local.vpc_azs
-  private_subnets    = var.vpc_private_subnets
-  public_subnets     = var.vpc_public_subnets
-  enable_nat_gateway = var.vpc_enable_nat_gateway
-  tags               = var.project_tags
+  source                 = "terraform-aws-modules/vpc/aws"
+  version                = "5.0.0"
+  name                   = var.vpc_name
+  cidr                   = var.vpc_cidr
+  azs                    = local.vpc_azs
+  private_subnets        = var.vpc_private_subnets
+  public_subnets         = var.vpc_public_subnets
+  enable_nat_gateway     = var.vpc_enable_nat_gateway
+  single_nat_gateway     = var.single_nat_gateway
+  one_nat_gateway_per_az = var.one_nat_gateway_per_az
+  tags                   = var.project_tags
 }
 
 resource "aws_security_group" "ssh_allowed" {

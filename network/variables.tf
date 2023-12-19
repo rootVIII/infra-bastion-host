@@ -30,6 +30,18 @@ variable "vpc_enable_nat_gateway" {
   default     = true
 }
 
+variable "single_nat_gateway" {
+  description = "Private subnets route all traffic thru single gateway"
+  type        = bool
+  default     = true
+}
+
+variable "one_nat_gateway_per_az" {
+  description = "One NAT gateway in public subnet only"
+  type        = bool
+  default     = false
+}
+
 variable "aws_region" {
   description = "Set in root module"
   type        = string
