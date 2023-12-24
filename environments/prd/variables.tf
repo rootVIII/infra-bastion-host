@@ -15,7 +15,7 @@ variable "environment" {
 #   type        = string
 # }
 
-variable "aws_region" {
+variable "region" {
   description = "AWS Region"
   default     = "us-east-2"
   type        = string

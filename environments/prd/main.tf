@@ -1,7 +1,7 @@
 
 module "network" {
   source       = "../../network"
-  aws_region   = var.aws_region
+  region       = var.region
   project_tags = var.project_tags
   environment  = var.environment
 }

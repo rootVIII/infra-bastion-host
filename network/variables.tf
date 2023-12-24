@@ -40,7 +40,7 @@ variable "environment" {
   type        = string
 }
 
-variable "aws_region" {
+variable "region" {
   description = "Set in root module"
   type        = string
 }
@@ -52,5 +52,5 @@ variable "project_tags" {
 
 locals {
   vpc_name = "${var.environment}_vpc"
-  vpc_azs  = ["${var.aws_region}a", "${var.aws_region}b", "${var.aws_region}c"]
+  vpc_azs  = ["${var.region}a", "${var.region}b", "${var.region}c"]
 }

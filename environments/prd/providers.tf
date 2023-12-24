@@ -15,13 +15,9 @@ terraform {
     # }
   }
   required_version = ">=1.6.0"
-  backend "s3" {
-    bucket = "rootviii-prd-tfstate-storage"
-    key    = "prd/terraform.tfstate"
-    region = "us-east-1"
-  }
+  backend "s3" {}
 }
 
 provider "aws" {
-  region = var.aws_region
+  region = var.region
 }

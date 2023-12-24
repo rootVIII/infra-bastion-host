@@ -1,7 +1,7 @@
 
 output "aws_region" {
   description = "Current region"
-  value       = var.aws_region
+  value       = var.region
 }
 
 output "vpc_id" {
