@@ -6,5 +6,5 @@ Working towards this diagram setup (in progress):
 
 - Use `backend_setup/` to create two separate AWS S3 buckets for TF State storage (development and production)
 - The TF State for the backend is managed locally (init and apply from within `backend_setup/`)
-- Place the names of each created bucket into the following files: `env/backend_s3_<env>.hcl`
-- Provide the backend config when performing init from project root: `terraform init -backend-config="env/backend_s3_dev.hcl"`
+- Update the bucket name in the appropriate providers.tf file: `environments/<env>/providers.tf`
+- terraform init/apply from environments/dev or environments/prd
