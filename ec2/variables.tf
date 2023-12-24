@@ -2,7 +2,7 @@
 variable "ami" {
   description = "Amazon Linux AMI"
   type        = string
-  default     = "ami-0759f51a90924c166"
+  default     = "ami-011ab7c70f5b5170a"
 }
 
 variable "project_tags" {
