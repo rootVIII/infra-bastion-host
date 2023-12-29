@@ -2,3 +2,4 @@
 .vs*
 .terraform*
 terraform.tfstate*
+infra-key*
