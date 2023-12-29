@@ -5,11 +5,12 @@ resource "aws_key_pair" "ssh_key" {
 }
 
 resource "aws_instance" "bastion_host" {
-  ami                    = var.ami
-  instance_type          = "t2.nano"
-  vpc_security_group_ids = [var.default_security_group_id]
-  subnet_id              = var.public_subnet_id
-  key_name               = aws_key_pair.ssh_key.key_name
+  ami                         = var.ami
+  instance_type               = "t2.nano"
+  vpc_security_group_ids      = [var.default_security_group_id]
+  subnet_id                   = var.public_subnet_id
+  key_name                    = aws_key_pair.ssh_key.key_name
+  associate_public_ip_address = "true"
 
   tags = {
     Name = "BastionHost"
