@@ -13,3 +13,7 @@ Working towards this diagram setup (in progress):
 - terraform init/apply from `environments/dev` or `environments/prd`
 
 - Provide the backend config path: `terraform init -backend-config=backend.hcl`
+
+- Before init/apply, create an SSH keypair: `ssh-keygen -b 2048 -t rsa -f infra-key` from within `environments/<env>`
+
+- Save the private infra-key file to SSH onto the Bastion EC2, the infra-key.pub can be deleted after init/apply (it gets installed onto the EC2 instance)
