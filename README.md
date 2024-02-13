@@ -1,7 +1,7 @@
-Terraform basic infrastructure setup with AWS... mostly just for practice.
+Terraform basic infrastructure setup with AWS for practice.
 
 
-Working towards this diagram setup (in progress):
+Working towards this diagram setup (in progress):<br>
 <img src="./screenshot/sc.png" alt="goal1">
 
 - Use `backend_setup/` to create two separate AWS S3 buckets for TF State storage (development and production)
