@@ -1,25 +1,61 @@
 
-module "vpc" {
-  source                 = "terraform-aws-modules/vpc/aws"
-  version                = "5.0.0"
-  name                   = local.vpc_name
-  cidr                   = var.vpc_cidr
-  azs                    = local.vpc_azs
-  private_subnets        = var.vpc_private_subnets
-  public_subnets         = var.vpc_public_subnets
-  enable_nat_gateway     = var.vpc_enable_nat_gateway
-  single_nat_gateway     = var.single_nat_gateway
-  one_nat_gateway_per_az = var.one_nat_gateway_per_az
-  tags                   = var.project_tags
+resource "aws_vpc" "dev_vpc" {
+  cidr_block       = var.vpc_cidr
+  instance_tenancy = "default"
+  tags             = var.project_tags
 }
 
-resource "aws_security_group" "ssh_allowed" {
-  vpc_id = module.vpc.vpc_id // output from above module at runtime
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+resource "aws_subnet" "dev_subnet_public_1" {
+  vpc_id                  = aws_vpc.dev_vpc.id
+  cidr_block              = var.vpc_public_subnet
+  map_public_ip_on_launch = "true"
+  availability_zone       = local.vpc_az
+}
+
+resource "aws_subnet" "dev_subnet_private_1" {
+  vpc_id                  = aws_vpc.dev_vpc.id
+  cidr_block              = var.vpc_private_subnet
+  map_public_ip_on_launch = "false"
+  availability_zone       = local.vpc_az
+}
+
+resource "aws_eip" "eip" {
+  domain = "vpc"
+}
+
+resource "aws_internet_gateway" "dev_igw" {
+  vpc_id = aws_vpc.dev_vpc.id
+}
+
+resource "aws_nat_gateway" "dev_ngw" {
+  allocation_id = aws_eip.eip.id
+  subnet_id     = aws_subnet.dev_subnet_public_1.id
+}
+
+resource "aws_route_table" "dev_public_route_table" {
+  vpc_id = aws_vpc.dev_vpc.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.dev_igw.id
   }
-  tags = var.project_tags
+}
+
+resource "aws_route_table" "dev_private_route_table" {
+  vpc_id = aws_vpc.dev_vpc.id
+
+  route {
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.dev_ngw.id
+  }
+}
+
+resource "aws_route_table_association" "dev_public_route_table_association" {
+  route_table_id = aws_route_table.dev_public_route_table.id
+  subnet_id      = aws_subnet.dev_subnet_public_1.id
+}
+
+resource "aws_route_table_association" "dev_private_route_table_association" {
+  route_table_id = aws_route_table.dev_private_route_table.id
+  subnet_id      = aws_subnet.dev_subnet_private_1.id
 }

@@ -1,2 +1,2 @@
-namespace = "infra-bastion-host"
+namespace   = "infra-bastion-host"
 environment = "dev"

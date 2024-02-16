@@ -7,9 +7,9 @@ module "network" {
 }
 
 module "ec2" {
-  source                    = "../../ec2"
-  project_tags              = var.project_tags
-  default_security_group_id = module.network.vpc_id
-  public_subnet_id          = module.network.public_subnet_id
-  private_subnet_id         = module.network.private_subnet_id
+  source            = "../../ec2"
+  project_tags      = var.project_tags
+  vpc_id            = module.network.vpc_id
+  public_subnet_id  = module.network.public_subnet_id
+  private_subnet_id = module.network.private_subnet_id
 }

@@ -10,11 +10,6 @@ variable "project_tags" {
   type        = map(string)
 }
 
-variable "default_security_group_id" {
-  description = "Output default_security_group_id from VPC"
-  type        = string
-}
-
 variable "public_subnet_id" {
   description = "Output public_subnet ID from VPC"
   type        = string
@@ -22,5 +17,10 @@ variable "public_subnet_id" {
 
 variable "private_subnet_id" {
   description = "Output private_subnet ID from VPC"
+  type        = string
+}
+
+variable "vpc_id" {
+  description = "Output VPC ID from VPC"
   type        = string
 }
