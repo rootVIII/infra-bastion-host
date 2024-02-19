@@ -18,4 +18,4 @@ Working towards this diagram setup (in progress):<br>
 
 - Save the private infra-key file to SSH onto the Bastion EC2, the infra-key.pub can be deleted after init/apply (it gets installed onto the EC2 instance)
 
-- SSH to bastion host: `ssh -i infra-key ec2-user@<bastion-host IP>`
+- SSH to bastion host: `ssh -i infra-key ec2-user@<bastion-host Public IP>`
