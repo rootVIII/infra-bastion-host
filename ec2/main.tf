@@ -1,4 +1,5 @@
 resource "aws_security_group" "bastion_sg" {
+  vpc_id = var.vpc_id
   description = "Security group for bastion host"
 
   ingress {
@@ -16,6 +17,7 @@ resource "aws_security_group" "bastion_sg" {
 }
 
 resource "aws_security_group" "private_instance_sg" {
+  vpc_id = var.vpc_id
   description = "Security group for private EC2 instance"
 
   # Allow SSH from the bastion host security group
