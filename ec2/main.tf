@@ -1,5 +1,5 @@
 resource "aws_security_group" "bastion_sg" {
-  vpc_id = var.vpc_id
+  vpc_id      = var.vpc_id
   description = "Security group for bastion host"
 
   ingress {
@@ -17,14 +17,14 @@ resource "aws_security_group" "bastion_sg" {
 }
 
 resource "aws_security_group" "private_instance_sg" {
-  vpc_id = var.vpc_id
+  vpc_id      = var.vpc_id
   description = "Security group for private EC2 instance"
 
   # Allow SSH from the bastion host security group
   ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
+    from_port       = 22
+    to_port         = 22
+    protocol        = "tcp"
     security_groups = [aws_security_group.bastion_sg.id]
   }
   egress {
@@ -58,7 +58,7 @@ resource "aws_instance" "private_host" {
   instance_type          = "t2.nano"
   vpc_security_group_ids = [aws_security_group.private_instance_sg.id]
   subnet_id              = var.private_subnet_id
-  key_name                    = aws_key_pair.ssh_key.key_name
+  key_name               = aws_key_pair.ssh_key.key_name
   tags = {
     Name = "PrivateHost"
   }
